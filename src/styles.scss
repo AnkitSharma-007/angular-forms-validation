@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.container {
+  padding-top: 40px;
+}
+
+.title-home{
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
