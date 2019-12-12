@@ -1,6 +1,6 @@
 # AngularFormsValidation
 
-This project depicts the validations in Reactive forms and Template-driven forms in Angular. We will learn about the inbuilt as well as custom validations.
+This project explains about validations in Reactive and Template-driven forms in Angular. We will learn about the inbuilt as well as custom validations.
 
 # Live Demo
 
