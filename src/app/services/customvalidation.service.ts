@@ -7,8 +7,6 @@ import { FormGroup } from '@angular/forms';
 })
 export class CustomvalidationService {
 
-  debouncer: any;
-
   patternValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } => {
       if (!control.value) {
