@@ -25,8 +25,7 @@
                                 *ngIf="(email.touched || registerForm.submitted) && email.errors?.required">
                                 Email is required
                             </span>
-                            <span class="text-danger"
-                                *ngIf="(email.touched || registerForm.submitted) && email.errors?.email">
+                            <span class="text-danger" *ngIf="email.touched && email.errors?.email">
                                 Enter a valid email address
                             </span>
                         </div>
@@ -64,7 +63,7 @@
                                 Confirm Password is required
                             </span>
                             <span class="text-danger"
-                                *ngIf="(confirmPassword.touched || registerForm.submitted) && confirmPassword.errors?.passwordMismatch">
+                                *ngIf="confirmPassword.touched && confirmPassword.errors?.passwordMismatch">
                                 Passwords doesnot match
                             </span>
                         </div>
