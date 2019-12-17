@@ -6,6 +6,7 @@ This project explains about validations in Reactive and Template-driven forms in
 
 Read the articles at my blog
 - [Reactive Form Validation in Angular](https://ankitsharmablogs.com/reactive-form-validation-in-angular/)
+- [Template-Driven Form Validation In Angular](https://ankitsharmablogs.com/template-driven-form-validation-in-angular/)
 
 # Live Demo
 
