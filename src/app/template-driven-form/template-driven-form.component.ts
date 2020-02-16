@@ -13,7 +13,7 @@ export class TemplateDrivenFormComponent {
   constructor() { }
 
   onSubmit() {
-    alert('Form Submitted succesfully!!!\n Check the values in browser console.');
+    alert('Form Submitted successfully!!!\n Check the values in browser console.');
     console.table(this.userModal);
   }
 
