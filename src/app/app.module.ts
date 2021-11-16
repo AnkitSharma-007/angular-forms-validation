@@ -28,10 +28,10 @@ import { ValidateUserNameDirective } from './directives/validate-user-name.direc
     ReactiveFormsModule,
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'reactive-form', component: ReactiveFormComponent },
-      { path: 'template-form', component: TemplateDrivenFormComponent },
-    ]),
+    { path: '', component: HomeComponent },
+    { path: 'reactive-form', component: ReactiveFormComponent },
+    { path: 'template-form', component: TemplateDrivenFormComponent },
+], { relativeLinkResolution: 'legacy' }),
   ],
   providers: [],
   bootstrap: [AppComponent]
