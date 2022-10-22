@@ -10,7 +10,7 @@ Read the articles at my blog
 
 # Live Demo
 
-This app is hosted on Heroku. See the app in action at https://ng-forms-validation.herokuapp.com/
+This app is hosted on Heroku. See the app in action at https://ng-forms-validation.web.app/
 
 ## Development server
 
