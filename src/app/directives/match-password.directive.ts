@@ -1,18 +1,31 @@
-import { Directive, Input } from '@angular/core';
-import { NG_VALIDATORS, Validator, ValidationErrors, FormGroup } from '@angular/forms';
-import { CustomvalidationService } from '../services/customvalidation.service';
+import { Directive, Input } from "@angular/core";
+import {
+  NG_VALIDATORS,
+  Validator,
+  ValidationErrors,
+  AbstractControl,
+} from "@angular/forms";
+import { CustomvalidationService } from "../services/customvalidation.service";
 
 @Directive({
-  selector: '[appMatchPassword]',
-  providers: [{ provide: NG_VALIDATORS, useExisting: MatchPasswordDirective, multi: true }]
+  selector: "[appMatchPassword]",
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: MatchPasswordDirective,
+      multi: true,
+    },
+  ],
 })
 export class MatchPasswordDirective implements Validator {
-  @Input('appMatchPassword') MatchPassword: string[] = [];
+  @Input("appMatchPassword") MatchPassword: string[] = [];
 
-  constructor(private customValidator: CustomvalidationService) { }
+  constructor(private readonly customValidator: CustomvalidationService) {}
 
-  validate(formGroup: FormGroup): ValidationErrors {
-    return this.customValidator.MatchPassword(this.MatchPassword[0], this.MatchPassword[1])(formGroup);
+  validate(control: AbstractControl): ValidationErrors {
+    return this.customValidator.matchPassword(
+      this.MatchPassword[0],
+      this.MatchPassword[1]
+    )(control);
   }
-
 }

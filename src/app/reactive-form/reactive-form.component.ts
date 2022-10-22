@@ -1,45 +1,72 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { CustomvalidationService } from '../services/customvalidation.service';
+import { Component, OnInit } from "@angular/core";
+import {
+  Validators,
+  FormGroup,
+  NonNullableFormBuilder,
+  FormControl,
+} from "@angular/forms";
+import { UserRegistration } from "../models/userRegistration";
+import { CustomvalidationService } from "../services/customvalidation.service";
+import { UserNameValidationService } from "../services/user-name-validation.service";
 
 @Component({
-  selector: 'app-reactive-form',
-  templateUrl: './reactive-form.component.html',
-  styleUrls: ['./reactive-form.component.scss']
+  selector: "app-reactive-form",
+  templateUrl: "./reactive-form.component.html",
+  styleUrls: ["./reactive-form.component.scss"],
 })
 export class ReactiveFormComponent implements OnInit {
-
-  registerForm: FormGroup;
-  submitted = false;
+  protected registerForm!: FormGroup<UserRegistration>;
+  protected submitted = false;
 
   constructor(
-    private fb: FormBuilder,
-    private customValidator: CustomvalidationService
-  ) { }
+    private readonly formBuilder: NonNullableFormBuilder,
+    private readonly customValidator: CustomvalidationService,
+    private readonly userNameValidationService: UserNameValidationService
+  ) {}
 
-  ngOnInit() {
-    this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      username: ['', [Validators.required], this.customValidator.userNameValidator.bind(this.customValidator)],
-      password: ['', Validators.compose([Validators.required, this.customValidator.patternValidator()])],
-      confirmPassword: ['', [Validators.required]],
-    },
+  ngOnInit(): void {
+    this.registerForm = this.formBuilder.group(
       {
-        validator: this.customValidator.MatchPassword('password', 'confirmPassword'),
+        name: new FormControl("", Validators.required),
+        email: new FormControl("", [Validators.required, Validators.email]),
+        username: new FormControl("", {
+          asyncValidators: [
+            this.userNameValidationService.validate.bind(
+              this.userNameValidationService
+            ),
+          ],
+          validators: [Validators.required],
+        }),
+        password: new FormControl("", [
+          Validators.required,
+          this.customValidator.patternValidator(),
+        ]),
+        confirmPassword: new FormControl("", [Validators.required]),
+      },
+      {
+        validators: [
+          this.customValidator.matchPassword("password", "confirmPassword"),
+        ],
       }
     );
   }
 
-  get registerFormControl() {
+  protected get registerFormControl() {
     return this.registerForm.controls;
   }
 
-  onSubmit() {
+  protected onSubmit(): void {
     this.submitted = true;
+
     if (this.registerForm.valid) {
-      alert('Form Submitted succesfully!!!\n Check the values in browser console.');
+      alert(
+        "Form Submitted succesfully!!!\n Check the values in browser console."
+      );
       console.table(this.registerForm.value);
     }
+  }
+
+  protected resetForm(): void {
+    this.registerForm.reset();
   }
 }
